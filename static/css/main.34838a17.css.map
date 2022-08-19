@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.34838a17.css","mappings":"AAAA,MACE,wBACF,CCFA,kBACE,wBACF","sources":["index.css","components/Form/Form.module.css"],"sourcesContent":[".Form {\n  background-color: lightgray;\n}",".form {\n  background-color: aquamarine;\n}"],"names":[],"sourceRoot":""}
