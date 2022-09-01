@@ -17,7 +17,6 @@ export const Button: FC<ButtonProps> = ({
     variant="contained"
     type="submit"
     onClick={click}
-    style={{ color: 'red' }}
   >
     {label}
   </MUIButton>

@@ -2,7 +2,7 @@
 name: 'Chromatic Deployment'
 
 # Event for the workflow
-on: pull_request
+on: push
 
 # List of jobs
 jobs:
@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: mshick/add-pr-comment@v1
+        env:
+          MY_TOKEN: ${{ secrets.MY_TOKEN }}
         with:
           message: |
             You can check this code in chromatic with the link

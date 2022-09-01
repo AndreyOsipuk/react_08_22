@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useState, memo } from 'react';
 import TextField from '@mui/material/TextField';
 
 import { Button } from './components/Button';
@@ -8,7 +8,7 @@ interface FormProps {
   addMessage: (msg: Message) => void;
 }
 
-export const Form: FC<FormProps> = ({ addMessage }) => {
+export const Form: FC<FormProps> = memo(({ addMessage }) => {
   const [value, setValue] = useState('');
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
@@ -27,4 +27,4 @@ export const Form: FC<FormProps> = ({ addMessage }) => {
       <Button label="send" disabled={!value} />
     </form>
   );
-};
+});
