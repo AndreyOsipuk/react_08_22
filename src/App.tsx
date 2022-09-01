@@ -1,30 +1,31 @@
 import { Form } from './components/Form';
 import { MessageList } from './components/MessageList';
-import { useState, useEffect } from 'react';
-import { AUTHOR } from './constants';
+import { useState, useEffect, FC, useCallback } from 'react';
 
-export const App = () => {
-  const [messages, setMessages] = useState([]);
+import { AUTHOR, Message, Messages } from './types';
 
-  const addMessage = (newMessage) => {
+export const App: FC = () => {
+  const [messages, setMessages] = useState<Messages>([]);
+
+  const addMessage = useCallback((newMessage: Message) => {
     setMessages((prevMesages) => [...prevMesages, newMessage]);
-  };
+  }, []);
 
   useEffect(() => {
     if (
       messages.length > 0 &&
-      messages[messages.length - 1].author === AUTHOR.user
+      messages[messages.length - 1].author === AUTHOR.USER
     ) {
       const timeout = setTimeout(() => {
         addMessage({
-          author: AUTHOR.bot,
+          author: AUTHOR.BOT,
           value: 'Im BOT',
         });
       }, 1000);
 
       return () => clearTimeout(timeout);
     }
-  }, [messages]);
+  }, [messages, addMessage]);
 
   return (
     <>
