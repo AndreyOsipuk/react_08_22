@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 const withReport = process.env.npm_config_withReport;
@@ -27,10 +28,10 @@ module.exports = {
     rules: [
       {
         exclude: /node_modules/,
-        test: /\.jsx?$/,
+        test: /\.(t|j)sx?$/,
         use: ['babel-loader'],
       },
-      { test: /\.tsx?$/, loader: 'ts-loader' },
+      // { test: /\.tsx?$/, loader: 'ts-loader' },
       {
         exclude: /\.module\.s?css$/i,
         test: /\.s?css$/i,
@@ -106,6 +107,7 @@ module.exports = {
           }),
         ]),
     ...(withReport ? new BundleAnalyzerPlugin() : ''),
+    new ForkTsCheckerWebpackPlugin(),
   ],
   resolve: {
     alias: {
