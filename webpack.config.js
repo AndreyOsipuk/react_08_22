@@ -21,7 +21,7 @@ module.exports = {
     process.env.NODE_ENV === 'production'
       ? 'hidden-source-map'
       : 'eval-source-map',
-  entry: path.resolve(__dirname, './src/index.jsx'),
+  entry: path.resolve(__dirname, './src/index.tsx'),
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   module: {
     rules: [
@@ -30,6 +30,7 @@ module.exports = {
         test: /\.jsx?$/,
         use: ['babel-loader'],
       },
+      { test: /\.tsx?$/, loader: 'ts-loader' },
       {
         exclude: /\.module\.s?css$/i,
         test: /\.s?css$/i,
@@ -113,6 +114,6 @@ module.exports = {
       store: path.resolve(__dirname, 'src/store'),
       svg: path.resolve(__dirname, 'src/assets/svg'),
     },
-    extensions: ['.jsx', '.js'],
+    extensions: ['.jsx', '.js', '.tsx', '.ts'],
   },
 };
