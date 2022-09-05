@@ -15,6 +15,7 @@ module.exports = {
       logging: 'info',
     },
     compress: true,
+    // for react router
     historyApiFallback: true,
     port: 8000,
   },
