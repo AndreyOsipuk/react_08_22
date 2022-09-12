@@ -3,25 +3,19 @@ import { useParams, Navigate } from 'react-router-dom';
 import { ChatList } from 'src/components/ChatList';
 import { Form } from 'src/components/Form';
 import { MessageList } from 'src/components/MessageList';
-import { AUTHOR, Chat, Message, Messages } from 'src/types';
+import { AUTHOR } from 'src/types';
 import style from './ChatPage.module.scss';
 
 import { WithClasses } from './../../HOC/WithClasses';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectMessages } from 'src/store/messages/selectors';
+import { addMessage } from 'src/store/messages/actions';
 
-interface ChatPageProps {
-  chats: Chat[];
-  onAddChat: (chat: Chat) => void;
-  messages: Messages;
-  onAddMessage: (chatId: string, msg: Message) => void;
-}
-export const ChatPage: FC<ChatPageProps> = ({
-  chats,
-  onAddChat,
-  messages,
-  onAddMessage,
-}) => {
+export const ChatPage: FC = () => {
   const { chatId } = useParams();
   const MessageListWithClass = WithClasses(MessageList);
+  const messages = useSelector(selectMessages);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (
@@ -30,15 +24,17 @@ export const ChatPage: FC<ChatPageProps> = ({
       messages[chatId][messages[chatId].length - 1].author === AUTHOR.USER
     ) {
       const timeout = setTimeout(() => {
-        onAddMessage(chatId, {
-          author: AUTHOR.BOT,
-          value: 'Im BOT',
-        });
+        dispatch(
+          addMessage(chatId, {
+            author: AUTHOR.BOT,
+            value: 'Im BOT',
+          })
+        );
       }, 1500);
 
       return () => clearTimeout(timeout);
     }
-  }, [chatId, messages, onAddMessage]);
+  }, [chatId, messages, dispatch]);
 
   if (chatId && !messages[chatId]) {
     return <Navigate to="/chats" replace />;
@@ -46,13 +42,13 @@ export const ChatPage: FC<ChatPageProps> = ({
 
   return (
     <>
-      <ChatList chats={chats} onAddChat={onAddChat} />
+      <ChatList />
       {/* <MessageList messages={chatId ? messages[chatId] : []} /> */}
       <MessageListWithClass
         messages={chatId ? messages[chatId] : []}
         classes={style.border}
       />
-      <Form addMessage={onAddMessage} />
+      <Form />
     </>
   );
 };

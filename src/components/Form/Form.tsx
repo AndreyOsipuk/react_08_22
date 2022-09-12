@@ -3,31 +3,33 @@ import TextField from '@mui/material/TextField';
 import { useParams } from 'react-router-dom';
 
 import { Button } from './components/Button';
-import { AUTHOR, Message } from 'src/types';
+import { AUTHOR } from 'src/types';
 import { ThemeContext } from './../../utils/ThemeContext';
+import { useDispatch } from 'react-redux';
+import { addMessage } from 'src/store/messages/actions';
+import { Wrapper } from './styled';
 
-interface FormProps {
-  addMessage: (chatId: string, msg: Message) => void;
-}
-
-export const Form: FC<FormProps> = memo(({ addMessage }) => {
+export const Form: FC = memo(() => {
   const [value, setValue] = useState('');
   const { chatId } = useParams();
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const dispatch = useDispatch();
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
     if (chatId) {
-      addMessage(chatId, {
-        author: AUTHOR.USER,
-        value,
-      });
+      dispatch(
+        addMessage(chatId, {
+          author: AUTHOR.USER,
+          value,
+        })
+      );
     }
     setValue('');
   };
 
   return (
-    <>
+    <Wrapper>
       <form onSubmit={handleSubmit}>
         <TextField
           value={value}
@@ -44,6 +46,6 @@ export const Form: FC<FormProps> = memo(({ addMessage }) => {
 
       <p>theme: {theme === 'light' ? '🌞' : '🌙'}</p>
       <button onClick={toggleTheme}>toggle theme</button>
-    </>
+    </Wrapper>
   );
 });
