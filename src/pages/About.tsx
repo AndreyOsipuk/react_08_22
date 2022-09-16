@@ -20,9 +20,13 @@ const mapStateToProps = (state: StoreState) => ({
   visible: state.profile.visible,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  toggle: () => dispatch(toggleProfile()),
-});
+// const mapDispatchToProps = (dispatch: Dispatch) => ({
+//   toggle: () => dispatch(toggleProfile()),
+// });
+
+const mapDispatchToProps = {
+  toggle: toggleProfile,
+};
 
 export const AboutWithConnect = connect(
   mapStateToProps,
