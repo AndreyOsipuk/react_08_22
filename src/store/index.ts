@@ -11,13 +11,13 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import { messagesReducer } from './messages/reducer';
+import { messagesReducer } from './messages/slice';
 import { profileReducer } from './profile/slice';
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['profile'],
+  blacklist: [],
 };
 
 const rootReducer = combineReducers({

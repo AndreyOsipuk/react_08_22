@@ -3,7 +3,12 @@ export interface Message {
   value: string;
 }
 
+export interface MessageWIthId extends Message {
+  id: string;
+}
+
 export type Messages = Record<string, Message[]>;
+export type MessagesWithId = Record<string, MessageWIthId[]>;
 
 export enum AUTHOR {
   USER = 'USER',
