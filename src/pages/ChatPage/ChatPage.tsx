@@ -9,23 +9,27 @@ import { WithClasses } from './../../HOC/WithClasses';
 import { useSelector } from 'react-redux';
 import { selectMessages } from 'src/store/messages/selectors';
 
-export const ChatPage: FC = () => {
+export const ChatPage: FC<any> = ({ chats, messages }) => {
   const { chatId } = useParams();
-  const MessageListWithClass = WithClasses(MessageList);
-  const messages = useSelector(selectMessages);
+  // const MessageListWithClass = WithClasses(MessageList);
+  // const messages = useSelector(selectMessages);
 
   if (chatId && !messages[chatId]) {
     return <Navigate to="/chats" replace />;
   }
 
+  const prepareMessages = [
+    ...Object.values((chatId && messages[chatId].messages) || {}),
+  ];
+
   return (
     <>
-      <ChatList />
-      {/* <MessageList messages={chatId ? messages[chatId] : []} /> */}
-      <MessageListWithClass
+      <ChatList chats={chats} />
+      <MessageList messages={prepareMessages} />
+      {/* <MessageListWithClass
         messages={chatId ? messages[chatId] : []}
         classes={style.border}
-      />
+      /> */}
       <Form />
     </>
   );

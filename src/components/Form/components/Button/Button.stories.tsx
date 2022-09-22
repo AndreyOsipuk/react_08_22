@@ -21,5 +21,5 @@ Primary.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true,
+  disabled: true
 };
