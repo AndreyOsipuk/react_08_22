@@ -1,13 +1,8 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ChatList } from 'src/components/ChatList';
 import { Form } from 'src/components/Form';
 import { MessageList } from 'src/components/MessageList';
-import style from './ChatPage.module.scss';
-
-import { WithClasses } from './../../HOC/WithClasses';
-import { useSelector } from 'react-redux';
-import { selectMessages } from 'src/store/messages/selectors';
 
 export const ChatPage: FC<any> = ({ chats, messages }) => {
   const { chatId } = useParams();

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from './Button';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
@@ -21,5 +20,5 @@ Primary.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  disabled: true
+  disabled: true,
 };

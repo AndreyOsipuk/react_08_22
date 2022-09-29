@@ -48,7 +48,7 @@ export const Header: FC = () => {
   return (
     <>
       <header style={{ backgroundColor: 'grey' }}>
-        <ul className={style.ul}>
+        <ul className={style['ul']}>
           {nav.map((item, idx) => (
             <li key={idx}>
               <NavLink

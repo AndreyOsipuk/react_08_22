@@ -1,15 +1,13 @@
 import { ListItem } from '@mui/material';
 import { NavLink } from 'react-router-dom';
-import { FC, useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectChats } from 'src/store/messages/selectors';
-import { set, push, ref, remove } from 'firebase/database';
-import { db, getChats } from 'src/services/firebase';
+import { FC, useState } from 'react';
+import { set, ref, remove } from 'firebase/database';
+import { db } from 'src/services/firebase';
 import { nanoid } from 'nanoid';
 
 export const ChatList: FC<any> = ({ chats }) => {
   const [value, setValue] = useState('');
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const chats = useSelector(
   //   selectChats,
   //   (prev, next) => prev.length === next.length

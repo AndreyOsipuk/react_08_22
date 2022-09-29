@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { Message } from 'src/types';
+// import { Message } from 'src/types';
 
-interface MessageListProps {
-  messages: Message[];
-}
+// interface MessageListProps {
+//   messages: Message[];
+// }
 
 export const MessageList: FC<any> = ({ messages }) => {
   return (
